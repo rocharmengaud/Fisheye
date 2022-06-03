@@ -1,45 +1,52 @@
-    async function getPhotographers() {
-        // Penser à remplacer par les données récupérées dans le json
-        const photographers = [
-            {
-                "name": "Ma data test",
-                "id": 1,
-                "city": "Paris",
-                "country": "France",
-                "tagline": "Ceci est ma data test",
-                "price": 400,
-                "portrait": "account.png"
-            },
-            {
-                "name": "Autre data test",
-                "id": 2,
-                "city": "Londres",
-                "country": "UK",
-                "tagline": "Ceci est ma data test 2",
-                "price": 500,
-                "portrait": "account.png"
-            },
-        ]
-        // et bien retourner le tableau photographers seulement une fois
-        return ({
-            photographers: [...photographers, ...photographers, ...photographers]})
-    }
+class Api {
+  constructor(url) {
+    this._url = url;
+  }
 
-    async function displayData(photographers) {
-        const photographersSection = document.querySelector(".photographer_section");
+  async get() {
+    return fetch(this._url)
+      .then((res) => res.json())
+      .then((res) => res.photographers)
+      .catch((err) => console.log('an error occurs', err));
+  }
+}
+// on va chercher les donnees dans le json
 
-        photographers.forEach((photographer) => {
-            const photographerModel = photographerFactory(photographer);
-            const userCardDOM = photographerModel.getUserCardDOM();
-            photographersSection.appendChild(userCardDOM);
-        });
-    };
+class MovieCard {
+  constructor(movie) {
+    this._movie = movie;
+    // des qu'on crée un constructor, on utilisera this
+  }
 
-    async function init() {
-        // Récupère les datas des photographes
-        const { photographers } = await getPhotographers();
-        displayData(photographers);
-    };
-    
-    init();
-    
+  createMovieCard() {
+    const $wrapper = document.querySelector('.photographer-wrapper');
+
+    const movieCard =
+      `<h3>` +
+      this._movie.name +
+      `</h3><img src="/assets/photographers/Photographers ID Photos/` +
+      this._movie.portrait +
+      `" />`;
+
+    $wrapper.innerHTML += movieCard;
+  }
+}
+
+class App {
+  constructor() {
+    this.moviesApi = new Api('/data/photographers.json');
+    // les classes demarrent toujours avec une majuscule (ici MovieApi)
+  }
+
+  async main() {
+    const movies = await this.moviesApi.get();
+
+    movies.forEach((movie) => {
+      const Template = new MovieCard(movie);
+      Template.createMovieCard();
+    });
+  }
+}
+
+const app = new App();
+app.main();
