@@ -23,14 +23,14 @@ h1 {
   margin-left: 100px;
 }
 
-.photographer_section {
+.photographer-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 70px;
   margin-top: 100px;
 }
 
-.photographer_section article {
+.photographer-wrapper article {
   justify-self: center;
   display: flex;
   justify-content: center;
@@ -38,12 +38,12 @@ h1 {
   flex-direction: column;
 }
 
-.photographer_section article h2 {
+.photographer-wrapper h2 {
   color: #d3573c;
   font-size: 36px;
 }
 
-.photographer_section article img {
+.photographer-wrapper img {
   height: 200px;
   width: 200px;
 }

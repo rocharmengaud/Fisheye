@@ -30,7 +30,7 @@ class PhotographerCard {
     photographerPicture.src =
       '/assets/photographers/Photographers ID Photos/' + this.card.portrait;
 
-    const photographerName = document.createElement('h1');
+    const photographerName = document.createElement('h2');
     photographerName.appendChild(document.createTextNode(this.card.name));
 
     const photographerPortrait = document.createElement('div');
@@ -40,20 +40,16 @@ class PhotographerCard {
     /**
      * CARD INFO
      */
+    const photographerInfo = document.createElement('div');
+    photographerInfo.className = 'photographer-info';
+    const photographerLocation = document.createElement('h1');
+    photographerLocation.appendChild(document.createTextNode(this.card.city));
 
     // les append font apparaitre la div et sa classe
     photographerCardWrapper.appendChild(photographerPortrait);
+    photographerInfo.appendChild(photographerLocation);
+    photographerCardWrapper.appendChild(photographerInfo);
     wrapper.appendChild(photographerCardWrapper);
-
-    // `<h1>` +
-    // this.card.name +
-    // `</h1><img src="/assets/photographers/Photographers ID Photos/` +
-    // this.card.portrait +
-    // `" />` +
-    // '<h3>' +
-    // this.card.city;
-
-    // wrapper.innerHTML += photographerCard;
   }
 }
 
