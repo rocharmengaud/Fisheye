@@ -14,8 +14,9 @@ header {
 }
 
 h1 {
-  color: #901c1c;
   margin-right: 100px;
+  color: #901c1c;
+  font-size: 36px;
 }
 
 .logo {
@@ -40,10 +41,47 @@ h1 {
 
 .photographer-wrapper h2 {
   color: #d3573c;
+  margin: 0;
+  padding-top: 1rem;
   font-size: 36px;
 }
 
 .photographer-wrapper img {
-  height: 200px;
-  width: 200px;
+  object-fit: cover;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+}
+
+.photographer-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photographer-portrait {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photographer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photographer-location {
+  color: #901c1c;
+  font-size: 13px;
+  display: flex;
+}
+
+.photographer-tagline {
+  font-size: 10px;
+}
+
+.photographer-price {
+  font-size: 9px;
+  color: #757575;
 }

@@ -21,20 +21,22 @@ class PhotographerCard {
     const wrapper = document.querySelector('.photographer-wrapper');
 
     const photographerCardWrapper = document.createElement('div');
+    photographerCardWrapper.setAttribute('id', this.card.id);
     photographerCardWrapper.className = 'photographer-card-wrapper';
-
     /**
      * CARD PORTRAIT
      */
+    const photographerPortrait = document.createElement('div');
+    photographerPortrait.className = 'photographer-portrait';
+
     const photographerPicture = document.createElement('img');
     photographerPicture.src =
       '/assets/photographers/Photographers ID Photos/' + this.card.portrait;
 
     const photographerName = document.createElement('h2');
+    photographerName.className = 'photographer-name';
     photographerName.appendChild(document.createTextNode(this.card.name));
 
-    const photographerPortrait = document.createElement('div');
-    photographerPortrait.className = 'photographer-portrait';
     photographerPortrait.appendChild(photographerPicture);
     photographerPortrait.appendChild(photographerName);
     /**
@@ -42,14 +44,41 @@ class PhotographerCard {
      */
     const photographerInfo = document.createElement('div');
     photographerInfo.className = 'photographer-info';
-    const photographerLocation = document.createElement('h1');
-    photographerLocation.appendChild(document.createTextNode(this.card.city));
 
-    // les append font apparaitre la div et sa classe
-    photographerCardWrapper.appendChild(photographerPortrait);
-    photographerInfo.appendChild(photographerLocation);
-    photographerCardWrapper.appendChild(photographerInfo);
+    const photographerLocation = document.createElement('div');
+    photographerLocation.className = 'photographer-location';
+
+    const photographerCity = document.createElement('div');
+    photographerCity.appendChild(document.createTextNode(this.card.city));
+
+    const photographerCountry = document.createElement('div');
+    photographerCountry.appendChild(
+      document.createTextNode(', ' + this.card.country)
+    );
+
+    const photographerTagline = document.createElement('div');
+    photographerTagline.className = 'photographer-tagline';
+    photographerTagline.appendChild(document.createTextNode(this.card.tagline));
+
+    const photographerPrice = document.createElement('div');
+    photographerPrice.className = 'photographer-price';
+    photographerPrice.appendChild(
+      document.createTextNode(this.card.price + ' €/jour')
+    );
+    /**
+     * CARD APPENDS
+     */
     wrapper.appendChild(photographerCardWrapper);
+
+    photographerCardWrapper.appendChild(photographerPortrait);
+    photographerCardWrapper.appendChild(photographerInfo);
+
+    photographerInfo.appendChild(photographerLocation);
+    photographerLocation.appendChild(photographerCity);
+    photographerLocation.appendChild(photographerCountry);
+
+    photographerInfo.appendChild(photographerTagline);
+    photographerInfo.appendChild(photographerPrice);
   }
 }
 
@@ -65,6 +94,7 @@ class App {
       template.createPhotographerCard();
     }
 
+    // ci-dessous une autre méthode au lieu de For of pour faire la boucle :
     // cards.forEach((card) => {
     //   const template = new PhotographerCard(card);
     //   template.createPhotographerCard();
