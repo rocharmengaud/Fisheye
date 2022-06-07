@@ -1,3 +1,7 @@
+const params = new URL(document.location).searchParams;
+const photographerId = parseInt(params.get('id'));
+console.log(photographerId);
+
 function photographerFactory(photographer) {
   const { name, portrait } = photographer;
 

@@ -21,14 +21,14 @@ class PhotographerCard {
   createPhotographerCard() {
     const wrapper = document.querySelector('.photographer-wrapper');
 
-    const photographerCardWrapper = document.createElement('a');
-    // photographer.html?id=xxx
-    photographerCardWrapper.setAttribute('href', 'photographer.html?id=' + this.card.id);
+    const photographerCardWrapper = document.createElement('div');
     photographerCardWrapper.className = 'photographer-card-wrapper center';
     /**
      * CARD PORTRAIT
      */
-    const photographerPortrait = document.createElement('div');
+    const photographerPortrait = document.createElement('a');
+    photographerPortrait.setAttribute('href', 'photographer.html?id=' + this.card.id);
+    // photographer.html?id=xxx
     photographerPortrait.className = 'photographer-portrait center';
 
     const photographerPicture = document.createElement('img');
