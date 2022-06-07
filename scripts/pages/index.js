@@ -12,6 +12,7 @@ class Api {
 // on va chercher les donnees dans le json
 
 class PhotographerCard {
+  // this grosso modo correspond au nom de la classe (ici PhotographerCard)
   constructor(card) {
     this.card = card;
     // des qu'on crée un constructor, on utilisera this
@@ -20,14 +21,15 @@ class PhotographerCard {
   createPhotographerCard() {
     const wrapper = document.querySelector('.photographer-wrapper');
 
-    const photographerCardWrapper = document.createElement('div');
-    photographerCardWrapper.setAttribute('id', this.card.id);
-    photographerCardWrapper.className = 'photographer-card-wrapper';
+    const photographerCardWrapper = document.createElement('a');
+    // photographer.html?id=xxx
+    photographerCardWrapper.setAttribute('href', 'photographer.html?id=' + this.card.id);
+    photographerCardWrapper.className = 'photographer-card-wrapper center';
     /**
      * CARD PORTRAIT
      */
     const photographerPortrait = document.createElement('div');
-    photographerPortrait.className = 'photographer-portrait';
+    photographerPortrait.className = 'photographer-portrait center';
 
     const photographerPicture = document.createElement('img');
     photographerPicture.src =
@@ -43,7 +45,7 @@ class PhotographerCard {
      * CARD INFO
      */
     const photographerInfo = document.createElement('div');
-    photographerInfo.className = 'photographer-info';
+    photographerInfo.className = 'photographer-info center';
 
     const photographerLocation = document.createElement('div');
     photographerLocation.className = 'photographer-location';
@@ -52,9 +54,7 @@ class PhotographerCard {
     photographerCity.appendChild(document.createTextNode(this.card.city));
 
     const photographerCountry = document.createElement('div');
-    photographerCountry.appendChild(
-      document.createTextNode(', ' + this.card.country)
-    );
+    photographerCountry.appendChild(document.createTextNode(', ' + this.card.country));
 
     const photographerTagline = document.createElement('div');
     photographerTagline.className = 'photographer-tagline';
@@ -62,9 +62,7 @@ class PhotographerCard {
 
     const photographerPrice = document.createElement('div');
     photographerPrice.className = 'photographer-price';
-    photographerPrice.appendChild(
-      document.createTextNode(this.card.price + ' €/jour')
-    );
+    photographerPrice.appendChild(document.createTextNode(this.card.price + ' €/jour'));
     /**
      * CARD APPENDS
      */
@@ -88,8 +86,9 @@ class App {
   }
 
   async main() {
-    const { photographers: cards } = await this.photographerCardApi.get();
-    for (const card of cards) {
+    const json = await this.photographerCardApi.get();
+    for (const card of json.photographers) {
+      // json.photographers = json.la clé dans le json ici "photographers"
       const template = new PhotographerCard(card);
       template.createPhotographerCard();
     }
