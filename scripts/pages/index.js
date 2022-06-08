@@ -12,7 +12,7 @@ class Api {
 // on va chercher les donnees dans le json
 
 class PhotographerCard {
-  // this grosso modo correspond au nom de la classe (ici PhotographerCard)
+  // "this" grosso modo correspond au nom de la classe (ici PhotographerCard)
   constructor(card) {
     this.card = card;
     // des qu'on crée un constructor, on utilisera this

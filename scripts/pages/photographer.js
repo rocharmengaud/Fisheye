@@ -9,8 +9,44 @@ class Api {
     return httpData;
   }
 }
-// on va chercher les donnees dans le json
-console.log();
+class PhotographerProfile {
+  constructor(profile) {
+    this.profile = profile;
+  }
+
+  createPhotographerProfile() {
+    const header = document.querySelector('.photograph-header');
+
+    const profileName = document.createElement('div');
+    profileName.className = 'profile-name';
+    profileName.appendChild(document.createTextNode(this.profile.name));
+
+    header.appendChild(profileName);
+  }
+}
+
+class App {
+  constructor() {
+    this.photographerProfileApi = new Api('/data/photographers.json');
+  }
+
+  async main() {
+    const json = await this.photographerProfileApi.get();
+    const params = new URL(document.location).searchParams;
+    const id = parseInt(params.get('id'));
+
+    const photographersFilter = json.photographers.filter((element) => {
+      // element ici n'est pas une propriété définie
+      return element.id === id;
+    });
+
+    const template = new PhotographerProfile(photographersFilter[0]);
+    template.createPhotographerProfile();
+  }
+}
+
+const app = new App();
+app.main();
 
 // recup id url
 // recup json
