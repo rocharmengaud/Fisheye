@@ -3,12 +3,39 @@
 }
 
 .photograph-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   background-color: #fafafa;
   height: 300px;
   margin: 0 100px;
 }
 
+.profile {
+  order: 1;
+}
+
+.profile-name {
+  font-size: 64px;
+  color: #d3573c;
+}
+
+.profile-picture {
+  order: 3;
+  object-fit: cover;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+}
+
+.profile-location {
+  display: flex;
+  font-size: 24px;
+  color: #901c1c;
+}
+
 .contact_button {
+  order: 2;
   font-size: 20px;
   font-weight: bold;
   color: white;
