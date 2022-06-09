@@ -59,6 +59,21 @@ class PhotographerProfile {
   }
 }
 
+class PhotographerMedia {
+  constructor(media) {
+    this.media = media;
+  }
+
+  createPhotographerMedia() {
+    const wrapper = document.querySelector('.photograph-media-wrapper');
+
+    const photographerPhotos = document.createElement('img');
+    photographerPhotos.src = '/assets/photographers/';
+
+    wrapper.appendChild(photographerPhotos);
+  }
+}
+
 class App {
   constructor() {
     this.photographerProfileApi = new Api('/data/photographers.json');
@@ -69,13 +84,25 @@ class App {
     const params = new URL(document.location).searchParams;
     const id = parseInt(params.get('id'));
 
-    const photographersFilter = json.photographers.filter((element) => {
+    const photographers = json.photographers.find((element) => {
       // element ici n'est pas une propriété définie
       return element.id === id;
     });
 
-    const template = new PhotographerProfile(photographersFilter[0]);
+    const template = new PhotographerProfile(photographers);
     template.createPhotographerProfile();
+
+    // on filtre les medias selon l'id du photographe avec un .filter
+    const mediasFilter = json.media.filter((element) => {
+      // element ici n'est pas une propriété définie
+      return element.photographerId === id;
+    });
+    console.log(mediasFilter);
+
+    for (const media of json.media) {
+      const mediaTemplate = new PhotographerMedia(media);
+      mediaTemplate.createPhotographerMedia();
+    }
   }
 }
 

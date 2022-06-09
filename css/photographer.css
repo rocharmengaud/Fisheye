@@ -34,6 +34,10 @@
   color: #901c1c;
 }
 
+.photograph-media-wrapper {
+  margin: 0 100px;
+}
+
 .contact_button {
   order: 2;
   font-size: 20px;
