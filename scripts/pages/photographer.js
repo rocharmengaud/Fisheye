@@ -68,7 +68,8 @@ class PhotographerMedia {
     const wrapper = document.querySelector('.photograph-media-wrapper');
 
     const photographerPhotos = document.createElement('img');
-    photographerPhotos.src = '/assets/photographers/';
+    photographerPhotos.src = '/assets/photographers/' + this.media.image;
+    // console.log(this.media);
 
     wrapper.appendChild(photographerPhotos);
   }
@@ -84,20 +85,20 @@ class App {
     const params = new URL(document.location).searchParams;
     const id = parseInt(params.get('id'));
 
-    const photographers = json.photographers.find((element) => {
+    const photographer = json.photographers.find((element) => {
       // element ici n'est pas une propriété définie
       return element.id === id;
     });
+    // console.log(photographer);
 
-    const template = new PhotographerProfile(photographers);
+    const template = new PhotographerProfile(photographer);
     template.createPhotographerProfile();
 
     // on filtre les medias selon l'id du photographe avec un .filter
     const mediasFilter = json.media.filter((element) => {
-      // element ici n'est pas une propriété définie
       return element.photographerId === id;
     });
-    console.log(mediasFilter);
+    // console.log(mediasFilter);
 
     for (const media of json.media) {
       const mediaTemplate = new PhotographerMedia(media);
