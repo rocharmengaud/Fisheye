@@ -35,7 +35,16 @@
 }
 
 .photograph-media-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
   margin: 0 100px;
+}
+
+.photograph-media-wrapper img {
+  object-fit: cover;
+  width: 450px;
+  height: 300px;
 }
 
 .contact_button {

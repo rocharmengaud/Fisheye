@@ -60,8 +60,9 @@ class PhotographerProfile {
 }
 
 class PhotographerMedia {
-  constructor(media) {
+  constructor(media, photographers) {
     this.media = media;
+    this.photographers = photographers;
   }
 
   createPhotographerMedia() {
@@ -69,7 +70,6 @@ class PhotographerMedia {
 
     const photographerPhotos = document.createElement('img');
     photographerPhotos.src = '/assets/photographers/' + this.media.image;
-    // console.log(this.media);
 
     wrapper.appendChild(photographerPhotos);
   }
@@ -89,18 +89,16 @@ class App {
       // element ici n'est pas une propriété définie
       return element.id === id;
     });
-    // console.log(photographer);
 
-    const template = new PhotographerProfile(photographer);
-    template.createPhotographerProfile();
+    const profile = new PhotographerProfile(photographer);
+    profile.createPhotographerProfile();
 
     // on filtre les medias selon l'id du photographe avec un .filter
-    const mediasFilter = json.media.filter((element) => {
+    const photographerMedia = json.media.filter((element) => {
       return element.photographerId === id;
     });
-    // console.log(mediasFilter);
 
-    for (const media of json.media) {
+    for (const media of photographerMedia) {
       const mediaTemplate = new PhotographerMedia(media);
       mediaTemplate.createPhotographerMedia();
     }
