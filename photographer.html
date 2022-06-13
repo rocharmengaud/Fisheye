@@ -17,8 +17,19 @@
       </a>
     </header>
     <main id="main">
-      <div class="photograph-header">
+      <div class="photograph-profile">
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      </div>
+      <div class="filter-wrapper">
+        <span>Trier par</span>
+        <div class="dropdown">
+          <input type="text" class="textBox" placeholder="Choisir une option" readonly />
+          <div class="option">
+            <div onclick="show('Popularité')">Popularité</div>
+            <div onclick="show('Date')">Date</div>
+            <div onclick="show('Titre')">Titre</div>
+          </div>
+        </div>
       </div>
       <div class="photograph-media-wrapper"></div>
     </main>
@@ -40,5 +51,6 @@
     <script src="/scripts/factories/photographer.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
+    <script src="/scripts/utils/dropdown.js"></script>
   </body>
 </html>

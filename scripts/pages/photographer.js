@@ -15,8 +15,11 @@ class PhotographerProfile {
   }
 
   createPhotographerProfile() {
-    const header = document.querySelector('.photograph-header');
+    const header = document.querySelector('.photograph-profile');
 
+    /**
+     * Profil du photographe
+     */
     const profile = document.createElement('div');
     profile.className = 'profile';
 
@@ -60,9 +63,8 @@ class PhotographerProfile {
 }
 
 class PhotographerMedia {
-  constructor(media, photographers) {
+  constructor(media) {
     this.media = media;
-    this.photographers = photographers;
   }
 
   createPhotographerMedia() {
@@ -71,7 +73,26 @@ class PhotographerMedia {
     const photographerPhotos = document.createElement('img');
     photographerPhotos.src = '/assets/photographers/' + this.media.image;
 
+    const mediaCard = document.createElement('div');
+    mediaCard.className = 'media-card';
+
+    const mediaInfo = document.createElement('div');
+    mediaInfo.className = 'media-info';
+
+    const mediaName = document.createElement('div');
+    mediaName.className = 'media-name';
+    mediaName.appendChild(document.createTextNode(this.media.title));
+
+    const mediaLikes = document.createElement('div');
+    mediaLikes.className = 'media-likes';
+    mediaLikes.appendChild(document.createTextNode(this.media.likes));
+
     wrapper.appendChild(photographerPhotos);
+    wrapper.appendChild(mediaCard);
+    mediaCard.appendChild(photographerPhotos);
+    mediaCard.appendChild(mediaInfo);
+    mediaInfo.appendChild(mediaName);
+    mediaInfo.appendChild(mediaLikes);
   }
 }
 
