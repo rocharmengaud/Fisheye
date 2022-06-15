@@ -25,39 +25,42 @@
         <div class="dropdown">
           <input type="text" class="textBox" placeholder="Choisir une option" readonly />
           <div class="option">
-            <div onclick="show('Popularité')">Popularité</div>
-            <div onclick="show('Date')">Date</div>
-            <div onclick="show('Titre')">Titre</div>
+            <div data-filtre="Popularité" class="filtreMedia">Popularité</div>
+            <div data-filtre="Date" class="filtreMedia">Date</div>
+            <div data-filtre="Titre" class="filtreMedia">Titre</div>
           </div>
         </div>
       </div>
       <div class="photograph-media-wrapper"></div>
     </main>
-    <div id="contact_modal">
-      <div class="modal">
-        <header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-        <form name="contact" id="contact" action="photographer.html" method="get">
-          <div class="formData">
-            <label for="first">Prénom</label><br />
-            <input class="text-control" type="text" id="first" name="first" /><br />
-          </div>
-          <div class="formData">
-            <label for="last">Nom</label><br />
-            <input class="text-control" type="text" id="last" name="last" /><br />
-          </div>
-          <div class="formData">
-            <label for="email">E-mail</label><br />
-            <input class="text-control" type="email" id="email" name="email" /><br />
-          </div>
-          <div class="formData">
-            <label for="message">Votre message</label><br />
-            <input class="text-control" type="text" id="message" name="message" /><br />
-          </div>
-          <button class="contact_button">Envoyer</button>
-        </form>
+    <div class="lightbox-wrapper"></div>
+    <div class="overlay-modal">
+      <div id="contact_modal">
+        <div class="modal">
+          <header>
+            <h2>Contactez-moi</h2>
+            <img src="assets/icons/close.svg" onclick="closeModal()" />
+          </header>
+          <form name="contact" id="contact" action="photographer.html" method="get">
+            <div class="formData">
+              <label for="first">Prénom</label><br />
+              <input class="text-control" type="text" id="first" name="first" /><br />
+            </div>
+            <div class="formData">
+              <label for="last">Nom</label><br />
+              <input class="text-control" type="text" id="last" name="last" /><br />
+            </div>
+            <div class="formData">
+              <label for="email">E-mail</label><br />
+              <input class="text-control" type="email" id="email" name="email" /><br />
+            </div>
+            <div class="formData">
+              <label for="message">Votre message</label><br />
+              <input class="text-control" type="text" id="message" name="message" /><br />
+            </div>
+            <button class="contact_button">Envoyer</button>
+          </form>
+        </div>
       </div>
     </div>
     <script src="/scripts/factories/photographer.js"></script>

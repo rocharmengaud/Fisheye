@@ -63,15 +63,29 @@ class PhotographerProfile {
 }
 
 class PhotographerMedia {
-  constructor(media) {
+  constructor(media, photographers) {
     this.media = media;
+    this.photographers = photographers;
   }
 
   createPhotographerMedia() {
     const wrapper = document.querySelector('.photograph-media-wrapper');
+    const typeMedia = this.media.image.split('.').pop();
+    let photographerPhotos;
 
-    const photographerPhotos = document.createElement('img');
-    photographerPhotos.src = '/assets/photographers/' + this.media.image;
+    if (typeMedia === 'mp4') {
+      // creation de l'element source
+      const source = document.createElement('source');
+      source.src = '/assets/photographers/' + this.media.image;
+      source.type = 'video/mp4';
+      // creation de l'element vidéo
+      photographerPhotos = document.createElement('video');
+      photographerPhotos.src = '/assets/photographers/' + this.media.image;
+      photographerPhotos.appendChild(source);
+    } else {
+      photographerPhotos = document.createElement('img');
+      photographerPhotos.src = '/assets/photographers/' + this.media.image;
+    }
 
     const mediaCard = document.createElement('div');
     mediaCard.className = 'media-card';
@@ -120,11 +134,74 @@ class App {
     });
 
     for (const media of photographerMedia) {
-      const mediaTemplate = new PhotographerMedia(media);
+      const mediaTemplate = new PhotographerMedia(media, photographer);
       mediaTemplate.createPhotographerMedia();
     }
+
+    Array.from(
+      document.querySelectorAll(
+        '.photograph-media-wrapper .media-card img, .photograph-media-wrapper .media-card video'
+      )
+    ).forEach(function (element) {
+      element.addEventListener('click', (event) => {
+        // cet innerHTML sert a vider le wrapper a chaque clic sur un media
+        document.querySelector('.lightbox-wrapper').innerHTML = '';
+        const mediaLightbox = document.createElement('div');
+        mediaLightbox.className = 'media-lightbox';
+        const lightboxWrapper = document.querySelector('.lightbox-wrapper');
+        const typeMedia = event.target.getAttribute('src').split('.').pop();
+        const mediaImage = event.target.getAttribute('src');
+        console.log(typeMedia);
+        let photographerPhotos;
+
+        if (typeMedia === 'mp4') {
+          // creation de l'element source
+          const source = document.createElement('source');
+          source.src = mediaImage;
+          source.type = 'video/mp4';
+          // creation de l'element vidéo
+          photographerPhotos = document.createElement('video');
+          photographerPhotos.src = mediaImage;
+          photographerPhotos.appendChild(source);
+        } else {
+          photographerPhotos = document.createElement('img');
+          photographerPhotos.src = mediaImage;
+        }
+
+        mediaLightbox.appendChild(photographerPhotos);
+        lightboxWrapper.appendChild(mediaLightbox);
+      });
+    });
   }
+
+  async displayLightbox() {
+    const json = await this.photographerProfileApi.get();
+    const params = new URL(document.location).searchParams;
+    const id = parseInt(params.get('id'));
+    const photographerMedia = json.media.filter((element) => {
+      return element.photographerId === id;
+    });
+    const lightboxWrapper = document.querySelector('.lightbox-wrapper');
+    console.log(photographerMedia);
+
+    lightboxWrapper.style.display = 'block';
+  }
+
+  closeLightbox() {}
+
+  nextMedia() {}
+
+  previousMedia() {}
 }
 
 const app = new App();
 app.main();
+
+// creation de l'array des medias
+app.displayLightbox();
+
+Array.from(document.querySelectorAll('.filtreMedia')).forEach(function (element) {
+  element.addEventListener('click', (event) => {
+    console.log(event.target.getAttribute('data-filtre'));
+  });
+});
