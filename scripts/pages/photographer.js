@@ -81,6 +81,7 @@ class PhotographerMedia {
       // creation de l'element vidéo
       photographerPhotos = document.createElement('video');
       photographerPhotos.src = '/assets/photographers/' + this.media.image;
+      photographerPhotos.setAttribute('controls', 'controls');
       photographerPhotos.appendChild(source);
     } else {
       photographerPhotos = document.createElement('img');
@@ -203,5 +204,6 @@ app.displayLightbox();
 Array.from(document.querySelectorAll('.filtreMedia')).forEach(function (element) {
   element.addEventListener('click', (event) => {
     console.log(event.target.getAttribute('data-filtre'));
+    // il faudra utiliser switch pour le tri
   });
 });
