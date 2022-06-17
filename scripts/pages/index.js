@@ -26,6 +26,7 @@ class PhotographerCard {
     /**
      * CARD PORTRAIT
      */
+    // Ici le système permettant d'afficher l'id du photographe dans l'url
     const photographerPortrait = document.createElement('a');
     photographerPortrait.setAttribute('href', 'photographer.html?id=' + this.card.id);
     // photographer.html?id=xxx

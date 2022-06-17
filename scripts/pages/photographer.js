@@ -73,12 +73,13 @@ class PhotographerMedia {
     const typeMedia = this.media.image.split('.').pop();
     let photographerPhotos;
 
+    // Condition pour importer la vidéo et les images
     if (typeMedia === 'mp4') {
-      // creation de l'element source
+      // creation de l'element source contenant le type="video/mp4"
       const source = document.createElement('source');
       source.src = '/assets/photographers/' + this.media.image;
       source.type = 'video/mp4';
-      // creation de l'element vidéo
+      // creation de l'element vidéo ansi que l'ajout des contrôles
       photographerPhotos = document.createElement('video');
       photographerPhotos.src = '/assets/photographers/' + this.media.image;
       photographerPhotos.setAttribute('controls', 'controls');
@@ -88,6 +89,9 @@ class PhotographerMedia {
       photographerPhotos.src = '/assets/photographers/' + this.media.image;
     }
 
+    /**
+     * Media card
+     */
     const mediaCard = document.createElement('div');
     mediaCard.className = 'media-card';
 
@@ -112,20 +116,27 @@ class PhotographerMedia {
 }
 
 class App {
+  // recuperation des données du json en local
   constructor() {
     this.photographerProfileApi = new Api('/data/photographers.json');
   }
 
   async main() {
+    // on GET le json et on extrait l'id dans l'url du site
     const json = await this.photographerProfileApi.get();
     const params = new URL(document.location).searchParams;
     const id = parseInt(params.get('id'));
 
+    // ici on va return  l'id d'un seul photographe
     const photographer = json.photographers.find((element) => {
       // element ici n'est pas une propriété définie
       return element.id === id;
     });
 
+    /**
+     * on se sert de l'id qu'on a return juste avant ici
+     * en paramètre d'une nouvelle instance
+     */
     const profile = new PhotographerProfile(photographer);
     profile.createPhotographerProfile();
 
@@ -134,6 +145,7 @@ class App {
       return element.photographerId === id;
     });
 
+    // on fait une boucle pour importer chaque media un par un
     for (const media of photographerMedia) {
       const mediaTemplate = new PhotographerMedia(media, photographer);
       mediaTemplate.createPhotographerMedia();
@@ -143,6 +155,7 @@ class App {
       document.querySelectorAll(
         '.photograph-media-wrapper .media-card img, .photograph-media-wrapper .media-card video'
       )
+      // Initialisation de la lightbox avec un clic sur un média
     ).forEach(function (element) {
       element.addEventListener('click', (event) => {
         // cet innerHTML sert a vider le wrapper a chaque clic sur un media
@@ -153,6 +166,7 @@ class App {
         const typeMedia = event.target.getAttribute('src').split('.').pop();
         const mediaImage = event.target.getAttribute('src');
         console.log(typeMedia);
+
         let photographerPhotos;
 
         if (typeMedia === 'mp4') {
