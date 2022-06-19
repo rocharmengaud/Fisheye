@@ -1,0 +1,85 @@
+.lightbox-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 2;
+  overflow: auto;
+  animation: lightboxFadeIn 0.5s;
+  display: none;
+}
+
+.lightbox-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-preview img,
+.lightbox-preview video {
+  max-width: 100%;
+  height: auto;
+  animation: lightboxFadeIn 0.5s;
+}
+
+.lightbox-next,
+.lightbox-previous {
+  background: url('/assets/icons/arrow.svg') center center / 50px 80px no-repeat;
+  width: 50px;
+  height: 100%;
+  border: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-top: -14px;
+}
+
+.lightbox-previous {
+  right: auto;
+  left: 0;
+  transform: rotate(180deg);
+}
+
+.lightbox-next:hover,
+.lightbox-previous:hover {
+  opacity: 1;
+}
+
+.lightbox-close {
+  width: 50px;
+  height: 50px;
+  /* mettre les 100% permettent de modifier width et height */
+  background: url('/assets/icons/close2.svg') center center / 100% 100% no-repeat
+    transparent;
+  border: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  /* z-index: ; */
+}
+
+.lightbox-wrapper button {
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  /* enlever le texte suivant et précédent */
+  text-indent: -3000px;
+}
+
+.lightbox-wrapper button:hover {
+  opacity: 1;
+}

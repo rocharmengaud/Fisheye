@@ -156,16 +156,15 @@ class App {
         '.photograph-media-wrapper .media-card img, .photograph-media-wrapper .media-card video'
       )
       // Initialisation de la lightbox avec un clic sur un média
-    ).forEach(function (element) {
+    ).forEach((element) => {
       element.addEventListener('click', (event) => {
         // cet innerHTML sert a vider le wrapper a chaque clic sur un media
-        document.querySelector('.lightbox-wrapper').innerHTML = '';
+        document.querySelector('.lightbox-preview').innerHTML = '';
         const mediaLightbox = document.createElement('div');
-        mediaLightbox.className = 'media-lightbox';
-        const lightboxWrapper = document.querySelector('.lightbox-wrapper');
+        mediaLightbox.className = 'lightbox-preview';
+        const lightboxPreview = document.querySelector('.lightbox-preview');
         const typeMedia = event.target.getAttribute('src').split('.').pop();
         const mediaImage = event.target.getAttribute('src');
-        console.log(typeMedia);
 
         let photographerPhotos;
 
@@ -177,6 +176,7 @@ class App {
           // creation de l'element vidéo
           photographerPhotos = document.createElement('video');
           photographerPhotos.src = mediaImage;
+          photographerPhotos.setAttribute('controls', 'controls');
           photographerPhotos.appendChild(source);
         } else {
           photographerPhotos = document.createElement('img');
@@ -184,20 +184,21 @@ class App {
         }
 
         mediaLightbox.appendChild(photographerPhotos);
-        lightboxWrapper.appendChild(mediaLightbox);
+        lightboxPreview.appendChild(mediaLightbox);
+        this.openLightbox();
       });
     });
   }
 
-  async displayLightbox() {
-    const json = await this.photographerProfileApi.get();
-    const params = new URL(document.location).searchParams;
-    const id = parseInt(params.get('id'));
-    const photographerMedia = json.media.filter((element) => {
-      return element.photographerId === id;
-    });
+  async openLightbox() {
+    // const json = await this.photographerProfileApi.get();
+    // const params = new URL(document.location).searchParams;
+    // const id = parseInt(params.get('id'));
+    // const photographerMedia = json.media.filter((element) => {
+    //   return element.photographerId === id;
+    // });
     const lightboxWrapper = document.querySelector('.lightbox-wrapper');
-    console.log(photographerMedia);
+    // console.log(photographerMedia);
 
     lightboxWrapper.style.display = 'block';
   }
@@ -213,7 +214,7 @@ const app = new App();
 app.main();
 
 // creation de l'array des medias
-app.displayLightbox();
+// app.openLightbox();
 
 Array.from(document.querySelectorAll('.filtreMedia')).forEach(function (element) {
   element.addEventListener('click', (event) => {
