@@ -150,7 +150,9 @@ class App {
       const mediaTemplate = new PhotographerMedia(media, photographer);
       mediaTemplate.createPhotographerMedia();
     }
-
+    /**
+     * LIGHTBOX
+     */
     Array.from(
       document.querySelectorAll(
         '.photograph-media-wrapper .media-card img, .photograph-media-wrapper .media-card video'
@@ -166,7 +168,7 @@ class App {
         const typeMedia = event.target.getAttribute('src').split('.').pop();
         const mediaImage = event.target.getAttribute('src');
 
-        let photographerPhotos;
+        let photographerMedia;
 
         if (typeMedia === 'mp4') {
           // creation de l'element source
@@ -174,40 +176,51 @@ class App {
           source.src = mediaImage;
           source.type = 'video/mp4';
           // creation de l'element vidéo
-          photographerPhotos = document.createElement('video');
-          photographerPhotos.src = mediaImage;
-          photographerPhotos.setAttribute('controls', 'controls');
-          photographerPhotos.appendChild(source);
+          photographerMedia = document.createElement('video');
+          photographerMedia.src = mediaImage;
+          photographerMedia.setAttribute('controls', 'controls');
+          photographerMedia.appendChild(source);
         } else {
-          photographerPhotos = document.createElement('img');
-          photographerPhotos.src = mediaImage;
+          photographerMedia = document.createElement('img');
+          photographerMedia.src = mediaImage;
         }
 
-        mediaLightbox.appendChild(photographerPhotos);
+        mediaLightbox.appendChild(photographerMedia);
         lightboxPreview.appendChild(mediaLightbox);
+
         this.openLightbox();
+        this.closeLightbox();
       });
     });
   }
 
   async openLightbox() {
-    // const json = await this.photographerProfileApi.get();
-    // const params = new URL(document.location).searchParams;
-    // const id = parseInt(params.get('id'));
-    // const photographerMedia = json.media.filter((element) => {
-    //   return element.photographerId === id;
-    // });
     const lightboxWrapper = document.querySelector('.lightbox-wrapper');
-    // console.log(photographerMedia);
-
     lightboxWrapper.style.display = 'block';
   }
 
-  closeLightbox() {}
+  closeLightbox() {
+    const cross = document.querySelector('.lightbox-close');
+    const lightbox = document.querySelector('.lightbox-wrapper');
+    cross.addEventListener('click', (event) => {
+      event.preventDefault();
+      lightbox.style.display = 'none';
+    });
+  }
 
-  nextMedia() {}
+  nextMedia() {
+    const next = document.querySelector('.lightbox-next');
+    next.addEventListener('click', (event) => {
+      event.preventDefault();
+    });
+  }
 
-  previousMedia() {}
+  previousMedia() {
+    const previous = document.querySelector('.lightbox-previous');
+    previous.addEventListener('click', (event) => {
+      event.preventDefault();
+    });
+  }
 }
 
 const app = new App();

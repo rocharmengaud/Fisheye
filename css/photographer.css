@@ -52,7 +52,7 @@
   position: absolute;
   right: 140px;
   top: 10px;
-  z-index: 2;
+  z-index: 1;
   width: 8px;
   height: 8px;
   border: 2px solid #fff;
@@ -177,7 +177,7 @@
   top: 0;
   left: 0;
   display: none;
-  z-index: 3;
+  z-index: 2;
 }
 
 .modal header {
