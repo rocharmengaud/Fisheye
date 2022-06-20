@@ -122,6 +122,7 @@
 .media-info {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .media-name {
@@ -129,8 +130,18 @@
   font-size: 24px;
 }
 
+.media-popularity {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .media-likes {
   font-size: 16px;
+}
+
+/* Icone du coeur provenant du site IonIcons */
+.md.hydrated {
+  color: #901c1c;
 }
 
 .photograph-media-wrapper img,
@@ -189,7 +200,9 @@
   cursor: pointer;
 }
 
-.modal header h2 {
+.modal .contact {
+  display: flex;
+  gap: 18rem;
   font-size: 46px;
   font-weight: normal;
   text-align: center;

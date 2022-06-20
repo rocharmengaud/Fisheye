@@ -102,16 +102,25 @@ class PhotographerMedia {
     mediaName.className = 'media-name';
     mediaName.appendChild(document.createTextNode(this.media.title));
 
+    const mediaPopularity = document.createElement('div');
+    mediaPopularity.className = 'media-popularity';
+
     const mediaLikes = document.createElement('div');
     mediaLikes.className = 'media-likes';
     mediaLikes.appendChild(document.createTextNode(this.media.likes));
+
+    const mediaHeart = document.createElement('div');
+    mediaHeart.className = 'media-heart';
+    mediaHeart.innerHTML = '<div><ion-icon name="heart"></ion-icon></div>';
 
     wrapper.appendChild(photographerPhotos);
     wrapper.appendChild(mediaCard);
     mediaCard.appendChild(photographerPhotos);
     mediaCard.appendChild(mediaInfo);
     mediaInfo.appendChild(mediaName);
-    mediaInfo.appendChild(mediaLikes);
+    mediaInfo.appendChild(mediaPopularity);
+    mediaPopularity.appendChild(mediaLikes);
+    mediaPopularity.appendChild(mediaHeart);
   }
 }
 
