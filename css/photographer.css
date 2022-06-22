@@ -147,7 +147,7 @@
 .photograph-media-wrapper img,
 .photograph-media-wrapper video {
   object-fit: cover;
-  width: 450px;
+  width: 100%;
   height: 300px;
 }
 

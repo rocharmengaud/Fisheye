@@ -45,6 +45,7 @@
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 7;
 }
 
 .lightbox-previous {
@@ -68,15 +69,13 @@
   position: fixed;
   top: 20px;
   right: 20px;
-  /* z-index: ; */
+  z-index: 10;
 }
 
 .lightbox-wrapper button {
   opacity: 0.5;
   cursor: pointer;
   transition: opacity 0.3s ease-in-out;
-  /* enlever le texte suivant et précédent */
-  text-indent: -3000px;
 }
 
 .lightbox-wrapper button:hover {

@@ -46,8 +46,7 @@ class PhotographerProfile {
 
     const profilePicture = document.createElement('img');
     profilePicture.className = 'profile-picture';
-    profilePicture.src =
-      '/assets/photographers/Photographers ID Photos/' + this.profile.portrait;
+    profilePicture.src = '/assets/photographers/Photographers ID Photos/' + this.profile.portrait;
 
     header.appendChild(profile);
     header.appendChild(profileName);
@@ -83,10 +82,12 @@ class PhotographerMedia {
       photographerPhotos = document.createElement('video');
       photographerPhotos.src = '/assets/photographers/' + this.media.image;
       photographerPhotos.setAttribute('controls', 'controls');
+      photographerPhotos.setAttribute('data-id', this.media.id);
       photographerPhotos.appendChild(source);
     } else {
       photographerPhotos = document.createElement('img');
       photographerPhotos.src = '/assets/photographers/' + this.media.image;
+      photographerPhotos.setAttribute('data-id', this.media.id);
     }
 
     /**
@@ -176,6 +177,7 @@ class App {
         const lightboxPreview = document.querySelector('.lightbox-preview');
         const typeMedia = event.target.getAttribute('src').split('.').pop();
         const mediaImage = event.target.getAttribute('src');
+        const idMedia = event.target.getAttribute('data-id');
 
         let photographerMedia;
 
@@ -188,10 +190,12 @@ class App {
           photographerMedia = document.createElement('video');
           photographerMedia.src = mediaImage;
           photographerMedia.setAttribute('controls', 'controls');
+          photographerMedia.setAttribute('data-id', idMedia);
           photographerMedia.appendChild(source);
         } else {
           photographerMedia = document.createElement('img');
           photographerMedia.src = mediaImage;
+          photographerMedia.setAttribute('data-id', idMedia);
         }
 
         mediaLightbox.appendChild(photographerMedia);
@@ -199,6 +203,7 @@ class App {
 
         this.openLightbox();
         this.closeLightbox();
+        this.nextMedia();
       });
     });
   }
@@ -217,10 +222,50 @@ class App {
     });
   }
 
-  nextMedia() {
+  async nextMedia() {
     const next = document.querySelector('.lightbox-next');
+    const json = await this.photographerProfileApi.get();
+    const params = new URL(document.location).searchParams;
+    const id = parseInt(params.get('id'));
+
+    const photographerMedias = json.media.filter((element) => {
+      return element.photographerId === id;
+    });
     next.addEventListener('click', (event) => {
       event.preventDefault();
+
+      const currentImage = parseInt(
+        document.querySelector('.lightbox-preview img, .lightbox-preview video').getAttribute('data-id')
+      );
+
+      let currentMedia = photographerMedias.findIndex((element) => {
+        return element.id === currentImage;
+      });
+
+      let nextMedia = currentMedia + 1;
+      const typeMedia = photographerMedias[nextMedia].image.split('.').pop();
+      let photographerMedia;
+
+      console.log(photographerMedias[nextMedia], typeMedia);
+      if (typeMedia === 'mp4') {
+        // creation de l'element source
+        const source = document.createElement('source');
+        source.src = '/assets/photographers/' + photographerMedias[nextMedia].image;
+        source.type = 'video/mp4';
+        // creation de l'element vidéo
+        photographerMedia = document.createElement('video');
+        photographerMedia.src = '/assets/photographers/' + photographerMedias[nextMedia].image;
+        photographerMedia.setAttribute('controls', 'controls');
+        photographerMedia.setAttribute('data-id', photographerMedias[nextMedia].id);
+        photographerMedia.appendChild(source);
+      } else {
+        photographerMedia = document.createElement('img');
+        photographerMedia.src = '/assets/photographers/' + photographerMedias[nextMedia].image;
+        photographerMedia.setAttribute('data-id', photographerMedias[nextMedia].id);
+      }
+
+      document.querySelector('.lightbox-preview').innerHTML = '';
+      document.querySelector('.lightbox-preview').appendChild(photographerMedia);
     });
   }
 
@@ -231,6 +276,13 @@ class App {
     });
   }
 }
+
+const body = document.querySelector('body');
+body.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape') {
+    document.querySelector('.lightbox-close').click();
+  }
+});
 
 const app = new App();
 app.main();
