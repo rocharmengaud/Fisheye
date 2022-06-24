@@ -145,7 +145,7 @@ class App {
 
     /**
      * on se sert de l'id qu'on a return juste avant ici
-     * en paramètre d'une nouvelle instance
+     * en paramètre d'une nouvelle instance de la classe PhotographerProfile
      */
     const profile = new PhotographerProfile(photographer);
     profile.createPhotographerProfile();
@@ -228,6 +228,7 @@ class App {
     const params = new URL(document.location).searchParams;
     const id = parseInt(params.get('id'));
 
+    // on filtre les medias selon l'id du photographe avec un .filter
     const photographerMedias = json.media.filter((element) => {
       return element.photographerId === id;
     });
@@ -281,6 +282,12 @@ const body = document.querySelector('body');
 body.addEventListener('keydown', function (event) {
   if (event.key === 'Escape') {
     document.querySelector('.lightbox-close').click();
+  }
+});
+
+body.addEventListener('keydown', function (event) {
+  if (event.key === 'ArrowRight') {
+    document.querySelector('.lightbox-next').click();
   }
 });
 
