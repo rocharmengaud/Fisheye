@@ -192,7 +192,6 @@
 }
 
 .modal header {
-  justify-content: space-between;
   width: 100%;
 }
 
@@ -201,8 +200,9 @@
 }
 
 .modal .contact {
+  width: 100%;
   display: flex;
-  gap: 18rem;
+  justify-content: space-between;
   font-size: 46px;
   font-weight: normal;
   text-align: center;

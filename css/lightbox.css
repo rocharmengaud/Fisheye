@@ -33,6 +33,7 @@
 .lightbox-preview video {
   max-width: 100%;
   height: auto;
+  max-height: 900px;
   animation: lightboxFadeIn 0.5s;
 }
 
@@ -63,8 +64,7 @@
   width: 50px;
   height: 50px;
   /* mettre les 100% permettent de modifier width et height */
-  background: url('/assets/icons/close2.svg') center center / 100% 100% no-repeat
-    transparent;
+  background: url('/assets/icons/close2.svg') center center / 100% 100% no-repeat transparent;
   border: none;
   position: fixed;
   top: 20px;
