@@ -209,7 +209,7 @@ class App {
     });
   }
 
-  async openLightbox() {
+  openLightbox() {
     const lightboxWrapper = document.querySelector('.lightbox-wrapper');
     lightboxWrapper.style.display = 'block';
   }
@@ -340,6 +340,13 @@ body.addEventListener('keydown', function (event) {
   if (event.key === 'ArrowLeft') {
     document.querySelector('.lightbox-previous').click();
   }
+});
+
+// Incrementation des likes (non fonctionnel)
+Array.from(document.querySelectorAll('.md .hydrated')).forEach((element) => {
+  element.addEventListener('click', (event) => {
+    console.log('test');
+  });
 });
 
 const app = new App();

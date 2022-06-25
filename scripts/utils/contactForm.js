@@ -20,5 +20,5 @@ const message = document.querySelector('#message');
 
 submit.addEventListener('click', (event) => {
   closeModal();
-  // console.log(first.value, last.value, email.value, message.value);
+  console.log(first.value, last.value, email.value, message.value);
 });

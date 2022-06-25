@@ -144,6 +144,11 @@
   color: #901c1c;
 }
 
+.md.hydrated:hover {
+  color: yellow;
+  cursor: pointer;
+}
+
 .photograph-media-wrapper img,
 .photograph-media-wrapper video {
   object-fit: cover;
