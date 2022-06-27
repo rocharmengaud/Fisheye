@@ -207,6 +207,15 @@ class App {
         this.previousMedia();
       });
     });
+
+    // incrémenter likes non fonctionnel
+    Array.from(document.querySelectorAll('.media-heart')).forEach((element) => {
+      const likes = document.querySelectorAll('.media-likes');
+      element.addEventListener('click', (event) => {
+        // j'ai besoin de me positionner sur le bon media-likes pour incrementer
+        likes.textContent = parseInt(likes.textContent) + 1;
+      });
+    });
   }
 
   openLightbox() {
@@ -340,13 +349,6 @@ body.addEventListener('keydown', function (event) {
   if (event.key === 'ArrowLeft') {
     document.querySelector('.lightbox-previous').click();
   }
-});
-
-// Incrementation des likes (non fonctionnel)
-Array.from(document.querySelectorAll('.md .hydrated')).forEach((element) => {
-  element.addEventListener('click', (event) => {
-    console.log('test');
-  });
 });
 
 const app = new App();
