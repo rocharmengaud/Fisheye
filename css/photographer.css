@@ -139,13 +139,19 @@
   font-size: 16px;
 }
 
+.liked {
+  color: yellow;
+}
 /* Icone du coeur provenant du site IonIcons */
 .md.hydrated {
   color: #901c1c;
 }
 
-.md.hydrated:hover {
+.md.hydrated.liked {
   color: yellow;
+}
+
+.md.hydrated:hover {
   cursor: pointer;
 }
 

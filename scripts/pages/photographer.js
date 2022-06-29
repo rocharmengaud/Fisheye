@@ -83,6 +83,7 @@ class PhotographerMedia {
       photographerPhotos.src = '/assets/photographers/' + this.media.image;
       photographerPhotos.setAttribute('controls', 'controls');
       photographerPhotos.setAttribute('data-id', this.media.id);
+      // photographerPhotos.setAttribute('data-name', this.media.title);
       photographerPhotos.appendChild(source);
     } else {
       photographerPhotos = document.createElement('img');
@@ -112,7 +113,7 @@ class PhotographerMedia {
 
     const mediaHeart = document.createElement('div');
     mediaHeart.className = 'media-heart';
-    mediaHeart.innerHTML = '<div><ion-icon name="heart"></ion-icon></div>';
+    mediaHeart.innerHTML = '<ion-icon name="heart"></ion-icon>';
 
     wrapper.appendChild(photographerPhotos);
     wrapper.appendChild(mediaCard);
@@ -210,12 +211,28 @@ class App {
 
     // incrémenter likes non fonctionnel
     Array.from(document.querySelectorAll('.media-heart')).forEach((element) => {
-      const likes = document.querySelectorAll('.media-likes');
       element.addEventListener('click', (event) => {
-        // j'ai besoin de me positionner sur le bon media-likes pour incrementer
-        likes.textContent = parseInt(likes.textContent) + 1;
+        let mediaHeart = event.target.parentNode.parentNode.querySelector('.md.hydrated');
+        let mediaPopularity = event.target.parentNode.parentNode.querySelector('.media-likes');
+
+        mediaHeart.classList.toggle('liked');
+        if (mediaHeart.classList.contains('liked')) {
+          mediaPopularity.textContent = parseInt(mediaPopularity.textContent) + 1;
+        } else {
+          mediaPopularity.textContent = parseInt(mediaPopularity.textContent) - 1;
+        }
       });
     });
+  }
+
+  totalLikes() {
+    console.log('test');
+    const likes = document.querySelectorAll('.media-likes');
+    let likesSum = 0;
+    for (const like of likes) {
+      likesSum = +like;
+      console.log(likesSum);
+    }
   }
 
   openLightbox() {

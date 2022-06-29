@@ -9,6 +9,11 @@ dropDown.onclick = function () {
 // L'option du dropdown selectionnée reste affichée
 Array.from(document.querySelectorAll('.filtreMedia')).forEach(function (element) {
   element.addEventListener('click', (event) => {
-    textBox.value = event.target.getAttribute('data-filtre');
+    textBox.value = event.target.getAttribute('data-sort');
+    // list.sort(function(a, b) {
+    //   return b.data('attribute-name') - a.data('attribute-name');
   });
 });
+// });
+
+// data-likes="1" data-date="12/12/2021" data-name="my name"
