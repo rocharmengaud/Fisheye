@@ -15,5 +15,3 @@ Array.from(document.querySelectorAll('.filtreMedia')).forEach(function (element)
   });
 });
 // });
-
-// data-likes="1" data-date="12/12/2021" data-name="my name"
