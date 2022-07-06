@@ -96,6 +96,7 @@
   border-radius: 10px;
   overflow: hidden;
   display: none;
+  z-index: 15;
 }
 
 .dropdown.active .option {

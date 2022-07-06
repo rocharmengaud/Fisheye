@@ -84,8 +84,6 @@ class PhotographerMedia {
       photographerPhotos.setAttribute('controls', 'controls');
       photographerPhotos.setAttribute('data-id', this.media.id);
       photographerPhotos.setAttribute('data-name', this.media.title);
-      photographerPhotos.setAttribute('data-date', this.media.date);
-      photographerPhotos.setAttribute('data-likes', this.media.likes);
 
       photographerPhotos.appendChild(source);
     } else {
@@ -93,8 +91,6 @@ class PhotographerMedia {
       photographerPhotos.src = '/assets/photographers/' + this.media.image;
       photographerPhotos.setAttribute('data-id', this.media.id);
       photographerPhotos.setAttribute('data-name', this.media.title);
-      photographerPhotos.setAttribute('data-date', this.media.date);
-      photographerPhotos.setAttribute('data-likes', this.media.likes);
     }
 
     /**
@@ -102,6 +98,10 @@ class PhotographerMedia {
      */
     const mediaCard = document.createElement('div');
     mediaCard.className = 'media-card';
+
+    mediaCard.setAttribute('data-name', this.media.title);
+    mediaCard.setAttribute('data-date', this.media.date);
+    mediaCard.setAttribute('data-likes', this.media.likes);
 
     const mediaInfo = document.createElement('div');
     mediaInfo.className = 'media-info';
@@ -216,14 +216,6 @@ class App {
     });
 
     Array.from(document.querySelectorAll('.media-heart')).forEach((element) => {
-      // let likes = element.parentNode.parentNode.querySelector('.media-likes').innerText;
-      // let totalLikes = 0;
-      // console.log(likes);
-
-      // for (let i = 0; i < likes.length; i++) {
-      //   totalLikes += Number(likes[i]);
-      //   // console.log(totalLikes);
-      // }
       element.addEventListener('click', (event) => {
         let mediaHeart = event.target.parentNode.parentNode.querySelector('.md.hydrated');
         let mediaPopularity = event.target.parentNode.parentNode.querySelector('.media-likes');
@@ -237,16 +229,6 @@ class App {
       });
     });
   }
-
-  // totalLikes() {
-  //   console.log('test');
-  //   const likes = document.querySelectorAll('.media-likes');
-  //   let likesSum = 0;
-  //   for (const like of likes) {
-  //     likesSum = +like;
-  //     console.log(likesSum);
-  //   }
-  // }
 
   openLightbox() {
     const lightboxWrapper = document.querySelector('.lightbox-wrapper');

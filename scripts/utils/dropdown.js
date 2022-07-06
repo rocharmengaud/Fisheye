@@ -12,22 +12,40 @@ Array.from(document.querySelectorAll('.filtreMedia')).forEach(function (element)
     textBox.value = event.target.getAttribute('data-sort');
     const textboxValue = event.target.getAttribute('data-sort');
 
-    let mediacardList = Array.from(document.querySelectorAll('.media-card'));
-    console.log(mediacardList);
+    const mediacardList = Array.from(document.querySelectorAll('.media-card'));
 
-    const dataLikes = document.querySelectorAll('[data-likes]');
-    console.log(dataLikes);
+    const mediaWrapper = document.querySelector('.photograph-media-wrapper');
 
     switch (textboxValue) {
       case 'Popularité':
-        mediacardList.sort(function (a, b) {
-          // console.log(b.dataLikes);
-          // return b.getAttribute('data-likes')('Popularité') - b.getAttribute('data-likes')('Popularité');
+        const dataLikes = mediacardList.sort((a, b) => {
+          return b.dataset.likes - a.dataset.likes;
+        });
+        mediaWrapper.innerHTML = '';
+
+        dataLikes.forEach((element) => {
+          mediaWrapper.appendChild(element);
         });
         break;
       case 'Date':
+        const dataDate = mediacardList.sort((a, b) => {
+          return new Date(b.dataset.date) - new Date(a.dataset.date);
+        });
+        mediaWrapper.innerHTML = '';
+
+        dataDate.forEach((element) => {
+          mediaWrapper.appendChild(element);
+        });
         break;
       case 'Titre':
+        const dataName = mediacardList.sort((a, b) => {
+          return a.dataset.name.localeCompare(b.dataset.name);
+        });
+        mediaWrapper.innerHTML = '';
+
+        dataName.forEach((element) => {
+          mediaWrapper.appendChild(element);
+        });
         break;
       default:
         console.log('Should never happen');
