@@ -9,7 +9,8 @@
   height: 60px;
   bottom: 0;
   right: 3rem;
-  /* z-index: 2; */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .stats-info {
