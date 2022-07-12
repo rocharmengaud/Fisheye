@@ -1,3 +1,4 @@
+let totalLikes = 0;
 class Api {
   constructor(url) {
     this.url = url;
@@ -133,6 +134,42 @@ class PhotographerMedia {
   }
 }
 
+class Stats {
+  constructor(profile) {
+    this.profile = profile;
+  }
+
+  totalLike() {
+    Array.from(document.querySelectorAll('.media-card')).forEach((element) => {
+      totalLikes += parseInt(element.dataset.likes);
+    });
+  }
+
+  totalStats() {
+    const main = document.querySelector('#main');
+
+    const frame = document.createElement('div');
+    frame.className = 'stats-frame';
+
+    const stats = document.createElement('div');
+    stats.className = 'stats-info';
+
+    const likes = document.createElement('div');
+    likes.className = 'stats-likes';
+
+    const price = document.createElement('div');
+    price.className = 'stats-price';
+    price.innerHTML = this.profile.price + ' €/jour';
+
+    likes.innerHTML = totalLikes + '<ion-icon name="heart"></ion-icon>';
+
+    main.appendChild(frame);
+    frame.appendChild(stats);
+    stats.appendChild(likes);
+    stats.appendChild(price);
+  }
+}
+
 class App {
   // recuperation des données du json en local
   constructor() {
@@ -168,6 +205,10 @@ class App {
       const mediaTemplate = new PhotographerMedia(media, photographer);
       mediaTemplate.createPhotographerMedia();
     }
+
+    const frameStats = new Stats(photographer);
+    frameStats.totalLike();
+    frameStats.totalStats();
     /**
      * LIGHTBOX
      */
