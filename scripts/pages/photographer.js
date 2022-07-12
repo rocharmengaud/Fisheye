@@ -1,5 +1,3 @@
-const params = new URL(document.location).searchParams;
-const id = parseInt(params.get('id'));
 class Api {
   constructor(url) {
     this.url = url;
@@ -144,6 +142,8 @@ class App {
   async main() {
     // on GET le json et on extrait l'id dans l'url du site
     const json = await this.photographerProfileApi.get();
+    const params = new URL(document.location).searchParams;
+    const id = parseInt(params.get('id'));
 
     // ici on va return  l'id d'un seul photographe
     const photographer = json.photographers.find((element) => {
@@ -248,6 +248,8 @@ class App {
   async nextMedia() {
     const next = document.querySelector('.lightbox-next');
     const json = await this.photographerProfileApi.get();
+    const params = new URL(document.location).searchParams;
+    const id = parseInt(params.get('id'));
 
     // on filtre les medias selon l'id du photographe avec un .filter
     const photographerMedias = json.media.filter((element) => {
@@ -294,6 +296,8 @@ class App {
   async previousMedia() {
     const previous = document.querySelector('.lightbox-previous');
     const json = await this.photographerProfileApi.get();
+    const params = new URL(document.location).searchParams;
+    const id = parseInt(params.get('id'));
 
     // on filtre les medias selon l'id du photographe avec un .filter
     const photographerMedias = json.media.filter((element) => {
