@@ -6,3 +6,5 @@ function totalLike() {
     console.log(totalLikes);
   });
 }
+
+totalLike();

@@ -79,7 +79,7 @@
   cursor: pointer;
   background: #901c1c;
   color: #fff;
-  box-shadow: 0 5px 20px #000;
+  box-shadow: 0 2px 2px #000;
   border: none;
   outline: none;
   padding: 12px 20px;
@@ -176,6 +176,12 @@
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.submit_button {
+  height: 40px;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal {
