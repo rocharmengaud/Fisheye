@@ -168,6 +168,16 @@ class Stats {
     stats.appendChild(likes);
     stats.appendChild(price);
   }
+
+  formName() {
+    const modalHeader = document.querySelector('.modal header');
+    const photographer = document.createElement('div');
+
+    photographer.className = 'photographer-name';
+    photographer.innerHTML = this.profile.name;
+
+    modalHeader.appendChild(photographer);
+  }
 }
 
 class App {
@@ -206,9 +216,11 @@ class App {
       mediaTemplate.createPhotographerMedia();
     }
 
+    // ici on importe les likes et le prix du photographe dans l'encadré
     const frameStats = new Stats(photographer);
     frameStats.totalLike();
     frameStats.totalStats();
+    frameStats.formName();
     /**
      * LIGHTBOX
      */
