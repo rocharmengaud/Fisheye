@@ -281,12 +281,15 @@ class App {
       element.addEventListener('click', (event) => {
         let mediaHeart = event.target.parentNode.parentNode.querySelector('.md.hydrated');
         let mediaPopularity = event.target.parentNode.parentNode.querySelector('.media-likes');
+        let totalLikes = parseInt(document.querySelector('.stats-likes').textContent);
 
         mediaHeart.classList.toggle('liked');
         if (mediaHeart.classList.contains('liked')) {
           mediaPopularity.textContent = parseInt(mediaPopularity.textContent) + 1;
+          totalLikes.innerHtml = totalLikes++;
         } else {
           mediaPopularity.textContent = parseInt(mediaPopularity.textContent) - 1;
+          totalLikes.innerHtml = totalLikes--;
         }
       });
     });
