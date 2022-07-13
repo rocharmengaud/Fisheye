@@ -13,9 +13,10 @@
 
 .lightbox-preview {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 90vh;
   margin-left: 50px;
   margin-right: 50px;
 }

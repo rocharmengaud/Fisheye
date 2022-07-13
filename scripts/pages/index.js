@@ -33,8 +33,8 @@ class PhotographerCard {
     photographerPortrait.className = 'photographer-portrait center';
 
     const photographerPicture = document.createElement('img');
-    photographerPicture.src =
-      '/assets/photographers/Photographers ID Photos/' + this.card.portrait;
+    photographerPicture.src = '/assets/photographers/Photographers ID Photos/' + this.card.portrait;
+    photographerPicture.setAttribute('alt', this.card.name);
 
     const photographerName = document.createElement('h2');
     photographerName.className = 'photographer-name';

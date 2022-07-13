@@ -239,6 +239,7 @@ class App {
         const typeMedia = event.target.getAttribute('src').split('.').pop();
         const mediaImage = event.target.getAttribute('src');
         const idMedia = event.target.getAttribute('data-id');
+        const dataName = event.target.getAttribute('data-name');
 
         let photographerMedia;
 
@@ -252,15 +253,22 @@ class App {
           photographerMedia.src = mediaImage;
           photographerMedia.setAttribute('controls', 'controls');
           photographerMedia.setAttribute('data-id', idMedia);
+          photographerMedia.setAttribute('data-name', dataName);
           photographerMedia.appendChild(source);
         } else {
           photographerMedia = document.createElement('img');
           photographerMedia.src = mediaImage;
           photographerMedia.setAttribute('data-id', idMedia);
+          photographerMedia.setAttribute('data-name', dataName);
         }
+
+        const description = document.createElement('div');
+        description.className = 'lightbox-media-title';
+        description.innerHTML = dataName;
 
         mediaLightbox.appendChild(photographerMedia);
         lightboxPreview.appendChild(mediaLightbox);
+        lightboxPreview.appendChild(description);
 
         this.openLightbox();
         this.closeLightbox();
@@ -323,7 +331,10 @@ class App {
       const typeMedia = photographerMedias[nextMedia].image.split('.').pop();
       let photographerMedia;
 
-      console.log(photographerMedias[nextMedia], typeMedia);
+      const description = document.createElement('div');
+      description.className = 'lightbox-media-title';
+      description.innerHTML = photographerMedias[nextMedia].title;
+
       if (typeMedia === 'mp4') {
         // creation de l'element source
         const source = document.createElement('source');
@@ -343,6 +354,7 @@ class App {
 
       document.querySelector('.lightbox-preview').innerHTML = '';
       document.querySelector('.lightbox-preview').appendChild(photographerMedia);
+      document.querySelector('.lightbox-preview').appendChild(description);
     });
   }
 
@@ -359,10 +371,12 @@ class App {
     previous.addEventListener('click', (event) => {
       event.preventDefault();
 
+      // on crée une variable contenant le media actuel
       const currentImage = parseInt(
         document.querySelector('.lightbox-preview img, .lightbox-preview video').getAttribute('data-id')
       );
 
+      // on crée une variable pour se positionner sur le media actuel
       let currentMedia = photographerMedias.findIndex((element) => {
         return element.id === currentImage;
       });
@@ -414,6 +428,28 @@ body.addEventListener('keydown', function (event) {
 body.addEventListener('keydown', function (event) {
   if (event.key === 'ArrowLeft') {
     document.querySelector('.lightbox-previous').click();
+  }
+});
+
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Tab') {
+    //add all elements we want to include in our selection
+    var focussableElements =
+      'a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
+    if (document.activeElement && document.activeElement.form) {
+      var focussable = Array.prototype.filter.call(
+        document.activeElement.form.querySelectorAll(focussableElements),
+        function (element) {
+          //check for visibility while always include the current activeElement
+          return element.offsetWidth > 0 || element.offsetHeight > 0 || element === document.activeElement;
+        }
+      );
+      var index = focussable.indexOf(document.activeElement);
+      if (index > -1) {
+        var nextElement = focussable[index + 1] || focussable[0];
+        nextElement.focus();
+      }
+    }
   }
 });
 
