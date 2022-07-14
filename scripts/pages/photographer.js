@@ -155,18 +155,26 @@ class Stats {
     stats.className = 'stats-info';
 
     const likes = document.createElement('div');
+    const total = document.createElement('div');
     likes.className = 'stats-likes';
+    total.className = 'total-likes';
 
     const price = document.createElement('div');
     price.className = 'stats-price';
     price.innerHTML = this.profile.price + ' €/jour';
 
-    likes.innerHTML = totalLikes + '<ion-icon name="heart"></ion-icon>';
+    total.innerHTML = totalLikes;
+
+    const heartIcon = document.createElement('div');
+    heartIcon.className = 'heart-icon';
+    heartIcon.innerHTML = '<ion-icon name="heart"></ion-icon>';
 
     main.appendChild(frame);
     frame.appendChild(stats);
     stats.appendChild(likes);
     stats.appendChild(price);
+    likes.appendChild(total);
+    likes.appendChild(heartIcon);
   }
 
   formName() {
@@ -281,15 +289,16 @@ class App {
       element.addEventListener('click', (event) => {
         let mediaHeart = event.target.parentNode.parentNode.querySelector('.md.hydrated');
         let mediaPopularity = event.target.parentNode.parentNode.querySelector('.media-likes');
-        let totalLikes = parseInt(document.querySelector('.stats-likes').textContent);
+        let totalLikes = parseInt(document.querySelector('.total-likes').innerHTML);
 
         mediaHeart.classList.toggle('liked');
         if (mediaHeart.classList.contains('liked')) {
           mediaPopularity.textContent = parseInt(mediaPopularity.textContent) + 1;
           totalLikes.innerHtml = totalLikes++;
+          console.log(totalLikes);
         } else {
           mediaPopularity.textContent = parseInt(mediaPopularity.textContent) - 1;
-          totalLikes.innerHtml = totalLikes--;
+          totalLikes = totalLikes--;
         }
       });
     });
@@ -388,6 +397,10 @@ class App {
       const typeMedia = photographerMedias[nextMedia].image.split('.').pop();
       let photographerMedia;
 
+      const description = document.createElement('div');
+      description.className = 'lightbox-media-title';
+      description.innerHTML = photographerMedias[nextMedia].title;
+
       console.log(photographerMedias[nextMedia], typeMedia);
       if (typeMedia === 'mp4') {
         // creation de l'element source
@@ -408,15 +421,20 @@ class App {
 
       document.querySelector('.lightbox-preview').innerHTML = '';
       document.querySelector('.lightbox-preview').appendChild(photographerMedia);
+      document.querySelector('.lightbox-preview').appendChild(description);
     });
   }
 }
 
 // Closing the lightbox when hitting escape key
 const body = document.querySelector('body');
+const modal = document.querySelector('#contact_modal');
+const overlay = document.querySelector('.overlay-modal');
 body.addEventListener('keydown', function (event) {
   if (event.key === 'Escape') {
     document.querySelector('.lightbox-close').click();
+    modal.style.display = 'none';
+    overlay.style.display = 'none';
   }
 });
 

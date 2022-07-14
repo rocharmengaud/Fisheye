@@ -151,7 +151,8 @@
   align-items: center;
 }
 
-.media-name {
+.media-name,
+.lightbox-media-title {
   color: #901c1c;
   font-size: 24px;
 }
