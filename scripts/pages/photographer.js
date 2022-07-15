@@ -240,10 +240,10 @@ class App {
     ).forEach((element) => {
       element.addEventListener('click', (event) => {
         // cet innerHTML sert a vider le wrapper a chaque clic sur un media
-        document.querySelector('.lightbox-preview').innerHTML = '';
+        document.querySelector('.lightbox-container').innerHTML = '';
         const mediaLightbox = document.createElement('div');
         mediaLightbox.className = 'lightbox-preview';
-        const lightboxPreview = document.querySelector('.lightbox-preview');
+        const lightboxPreview = document.querySelector('.lightbox-container');
         const typeMedia = event.target.getAttribute('src').split('.').pop();
         const mediaImage = event.target.getAttribute('src');
         const idMedia = event.target.getAttribute('data-id');
@@ -276,7 +276,7 @@ class App {
 
         mediaLightbox.appendChild(photographerMedia);
         lightboxPreview.appendChild(mediaLightbox);
-        lightboxPreview.appendChild(description);
+        mediaLightbox.appendChild(description);
 
         this.openLightbox();
         this.closeLightbox();
@@ -289,16 +289,16 @@ class App {
       element.addEventListener('click', (event) => {
         let mediaHeart = event.target.parentNode.parentNode.querySelector('.md.hydrated');
         let mediaPopularity = event.target.parentNode.parentNode.querySelector('.media-likes');
+        let likesContainer = document.querySelector('.total-likes');
         let totalLikes = parseInt(document.querySelector('.total-likes').innerHTML);
 
         mediaHeart.classList.toggle('liked');
         if (mediaHeart.classList.contains('liked')) {
           mediaPopularity.textContent = parseInt(mediaPopularity.textContent) + 1;
-          totalLikes.innerHtml = totalLikes++;
-          console.log(totalLikes);
+          likesContainer.innerHTML = totalLikes + 1;
         } else {
           mediaPopularity.textContent = parseInt(mediaPopularity.textContent) - 1;
-          totalLikes = totalLikes--;
+          likesContainer.innerHTML = totalLikes - 1;
         }
       });
     });
