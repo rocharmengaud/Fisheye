@@ -49,6 +49,7 @@ class PhotographerProfile {
     const profilePicture = document.createElement('img');
     profilePicture.className = 'profile-picture';
     profilePicture.src = '/assets/photographers/Photographers ID Photos/' + this.profile.portrait;
+    profilePicture.setAttribute('alt', 'Photographer portrait');
 
     header.appendChild(profile);
     header.appendChild(profileName);
@@ -86,6 +87,7 @@ class PhotographerMedia {
       photographerPhotos.setAttribute('controls', 'controls');
       photographerPhotos.setAttribute('data-id', this.media.id);
       photographerPhotos.setAttribute('data-name', this.media.title);
+      photographerPhotos.setAttribute('alt', this.media.title);
 
       photographerPhotos.appendChild(source);
     } else {
@@ -93,6 +95,7 @@ class PhotographerMedia {
       photographerPhotos.src = '/assets/photographers/' + this.media.image;
       photographerPhotos.setAttribute('data-id', this.media.id);
       photographerPhotos.setAttribute('data-name', this.media.title);
+      photographerPhotos.setAttribute('alt', this.media.title);
     }
 
     /**
