@@ -88,6 +88,7 @@ class PhotographerMedia {
       photographerPhotos.setAttribute('data-id', this.media.id);
       photographerPhotos.setAttribute('data-name', this.media.title);
       photographerPhotos.setAttribute('alt', this.media.title);
+      photographerPhotos.className = 'focussable';
 
       photographerPhotos.appendChild(source);
     } else {
@@ -96,13 +97,14 @@ class PhotographerMedia {
       photographerPhotos.setAttribute('data-id', this.media.id);
       photographerPhotos.setAttribute('data-name', this.media.title);
       photographerPhotos.setAttribute('alt', this.media.title);
+      photographerPhotos.className = 'focussable';
     }
 
     /**
      * Media card
      */
     const mediaCard = document.createElement('div');
-    mediaCard.className = 'media-card focussable';
+    mediaCard.className = 'media-card';
 
     mediaCard.setAttribute('data-name', this.media.title);
     mediaCard.setAttribute('data-date', this.media.date);
