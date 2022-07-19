@@ -127,5 +127,5 @@ document.addEventListener('keydown', function (event) {
 
 const app = new App();
 app.main();
-
+// Autre moyen d'appeller:
 // new App().main()
