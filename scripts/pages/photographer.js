@@ -4,6 +4,7 @@ class Api {
     this.url = url;
   }
 
+  // méthode asynchrone pour initialiser la recupération des données du json
   async get() {
     const httpResponse = await fetch(this.url);
     const httpData = await httpResponse.json();
@@ -12,10 +13,12 @@ class Api {
 }
 
 class PhotographerProfile {
+  // Classe constructeur pour pouvoir utiliser les clés au sein du json
   constructor(profile) {
     this.profile = profile;
   }
 
+  // Méthode pour la creation du profil du photographe
   createPhotographerProfile() {
     const header = document.querySelector('.photograph-profile');
 
@@ -70,6 +73,7 @@ class PhotographerMedia {
     this.photographers = photographers;
   }
 
+  // Méthode pour la creation de tous les médias du photographe
   createPhotographerMedia() {
     const wrapper = document.querySelector('.photograph-media-wrapper');
     const typeMedia = this.media.image.split('.').pop();
@@ -141,15 +145,18 @@ class PhotographerMedia {
 
 class Stats {
   constructor(profile) {
+    // Classe constructeur pour pouvoir utiliser les clés au sein du json
     this.profile = profile;
   }
 
+  // Méthode d'addition du total des likes des médias du photographe actuel
   totalLike() {
     Array.from(document.querySelectorAll('.media-card')).forEach((element) => {
       totalLikes += parseInt(element.dataset.likes);
     });
   }
 
+  // Méthode pour créer le contenu de l'encadré des statistiques de la page
   totalStats() {
     const main = document.querySelector('#main');
 
@@ -182,6 +189,7 @@ class Stats {
     likes.appendChild(heartIcon);
   }
 
+  // Méthode pour ajouter le nom du photographe actuel sur le formulaire de contact
   formName() {
     const modalHeader = document.querySelector('.modal header');
     const photographer = document.createElement('div');
@@ -194,31 +202,30 @@ class Stats {
 }
 
 class App {
-  // recuperation des données du json en local
+  // Classe constructeur avec le chemin contenant le Json pour le fonctionnement du fetch de la classe API
   constructor() {
     this.photographerProfileApi = new Api('/data/photographers.json');
   }
 
   async main() {
-    // on GET le json et on extrait l'id dans l'url du site
+    // Get du json et exctraction de l'id dans l'url du site
     const json = await this.photographerProfileApi.get();
     const params = new URL(document.location).searchParams;
     const id = parseInt(params.get('id'));
 
-    // ici on va return  l'id d'un seul photographe
+    // ici on va return  l'id du photographe actuel
     const photographer = json.photographers.find((element) => {
-      // element ici n'est pas une propriété définie
       return element.id === id;
     });
 
     /**
-     * on se sert de l'id qu'on a return juste avant ici
+     * on se sert de l'id qu'on a return juste avant ici,
      * en paramètre d'une nouvelle instance de la classe PhotographerProfile
      */
     const profile = new PhotographerProfile(photographer);
     profile.createPhotographerProfile();
 
-    // on filtre les medias selon l'id du photographe avec un .filter
+    // on filtre les medias selon l'id du photographe actuel avec un .filter
     const photographerMedia = json.media.filter((element) => {
       return element.photographerId === id;
     });
@@ -229,11 +236,12 @@ class App {
       mediaTemplate.createPhotographerMedia();
     }
 
-    // ici on importe les likes et le prix du photographe dans l'encadré
+    // Importation des likes et du tarif du photographe dans l'encadré du bas
     const frameStats = new Stats(photographer);
     frameStats.totalLike();
     frameStats.totalStats();
     frameStats.formName();
+
     /**
      * LIGHTBOX
      */
@@ -241,7 +249,7 @@ class App {
       document.querySelectorAll(
         '.photograph-media-wrapper .media-card img, .photograph-media-wrapper .media-card video'
       )
-      // Initialisation de la lightbox avec un clic sur un média
+      // Initialisation de la lightbox avec un clic sur un média avec forEach pour boucler
     ).forEach((element) => {
       element.addEventListener('click', (event) => {
         // cet innerHTML sert a vider le wrapper a chaque clic sur un media
@@ -256,6 +264,7 @@ class App {
 
         let photographerMedia;
 
+        // On trie les éléments par image ou vidéo avec une condition
         if (typeMedia === 'mp4') {
           // creation de l'element source
           const source = document.createElement('source');
@@ -275,6 +284,7 @@ class App {
           photographerMedia.setAttribute('data-name', dataName);
         }
 
+        // Titre de la photo dans la lightbox
         const description = document.createElement('div');
         description.className = 'lightbox-media-title';
         description.innerHTML = dataName;
@@ -283,6 +293,7 @@ class App {
         lightboxPreview.appendChild(mediaLightbox);
         mediaLightbox.appendChild(description);
 
+        // On appelle les méthodes à la fin du main()
         this.openLightbox();
         this.closeLightbox();
         this.nextMedia();
@@ -290,6 +301,7 @@ class App {
       });
     });
 
+    // Fonction pour incrémenter les likes sur la media-card et dans l'encadré du bas
     Array.from(document.querySelectorAll('.media-heart')).forEach((element) => {
       element.addEventListener('click', (event) => {
         let mediaHeart = event.target.parentNode.parentNode.querySelector('.md.hydrated');
@@ -336,22 +348,30 @@ class App {
     next.addEventListener('click', (event) => {
       event.preventDefault();
 
+      // Constante contenant l'id de l'image sur laquelle on a cliqué
       const currentImage = parseInt(
         document.querySelector('.lightbox-preview img, .lightbox-preview video').getAttribute('data-id')
       );
 
+      // Variable contenant la position à laquelle on se trouve dans les medias
       let currentMedia = photographerMedias.findIndex((element) => {
         return element.id === currentImage;
       });
 
+      // Positionnement sur le media qui va suivre
       let nextMedia = currentMedia + 1;
+      // Obtention de l'extension du média qui va suivre (img ou video)
       const typeMedia = photographerMedias[nextMedia].image.split('.').pop();
-      let photographerMedia;
 
+      // Titre de la photo au sein de la lightbox
       const description = document.createElement('div');
       description.className = 'lightbox-media-title';
       description.innerHTML = photographerMedias[nextMedia].title;
 
+      // déclaration de photographerMedia pour l'utiliser dans la fonction ci-dessous
+      let photographerMedia;
+
+      // Condition pour créer le média suivant dans la lightbox
       if (typeMedia === 'mp4') {
         // creation de l'element source
         const source = document.createElement('source');
@@ -375,6 +395,8 @@ class App {
     });
   }
 
+  // La méthode asynchrone suivante est l'opposée de nextMedia car
+  // elle passe au média précédent
   async previousMedia() {
     const previous = document.querySelector('.lightbox-previous');
     const json = await this.photographerProfileApi.get();
@@ -388,12 +410,10 @@ class App {
     previous.addEventListener('click', (event) => {
       event.preventDefault();
 
-      // on crée une variable contenant le media actuel
       const currentImage = parseInt(
         document.querySelector('.lightbox-preview img, .lightbox-preview video').getAttribute('data-id')
       );
 
-      // on crée une variable pour se positionner sur le media actuel
       let currentMedia = photographerMedias.findIndex((element) => {
         return element.id === currentImage;
       });
@@ -408,11 +428,9 @@ class App {
 
       console.log(photographerMedias[nextMedia], typeMedia);
       if (typeMedia === 'mp4') {
-        // creation de l'element source
         const source = document.createElement('source');
         source.src = '/assets/photographers/' + photographerMedias[nextMedia].image;
         source.type = 'video/mp4';
-        // creation de l'element vidéo
         photographerMedia = document.createElement('video');
         photographerMedia.src = '/assets/photographers/' + photographerMedias[nextMedia].image;
         photographerMedia.setAttribute('controls', 'controls');
@@ -431,7 +449,7 @@ class App {
   }
 }
 
-// Closing the lightbox when hitting escape key
+// Ferme la lightbox lors d'un appui sur la touche échap
 const body = document.querySelector('body');
 const modal = document.querySelector('#contact_modal');
 const overlay = document.querySelector('.overlay-modal');
@@ -443,25 +461,26 @@ body.addEventListener('keydown', function (event) {
   }
 });
 
-// Switching picture to next when hitting arrowright
+// Passage au média suivant lors d'un appui sur fléche de droite
 body.addEventListener('keydown', function (event) {
   if (event.key === 'ArrowRight') {
     document.querySelector('.lightbox-next').click();
   }
 });
 
-// Switching picture to previous when hitting arrowleft
+// Passage au média précédent lors d'un appui sur fléche de droite
 body.addEventListener('keydown', function (event) {
   if (event.key === 'ArrowLeft') {
     document.querySelector('.lightbox-previous').click();
   }
 });
 
+// fonction pour l'accessibilité avec la touche tab sur tous les éléments que l'on veut focussable
 document.addEventListener('keydown', function (event) {
   if (event.key === 'Tab') {
     //add all elements we want to include in our selection
     let focussableElements = document.querySelectorAll('.focussable');
-    console.log(focussable);
+    console.log(focussableElements);
     ('a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])');
     if (document.activeElement && document.activeElement.form) {
       let focussable = Array.prototype.filter.call(
@@ -480,5 +499,7 @@ document.addEventListener('keydown', function (event) {
   }
 });
 
+// Déclaration de la constante app contenant une nouvelle instance de App
 const app = new App();
+// Exécution de la méthode main contenant la majorité du JS du site
 app.main();

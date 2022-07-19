@@ -3,21 +3,22 @@ class Api {
     this.url = url;
   }
 
+  // méthode asynchrone pour initialiser la recupération des données du json
   async get() {
     const httpResponse = await fetch(this.url);
     const httpData = await httpResponse.json();
     return httpData;
   }
 }
-// on va chercher les donnees dans le json
 
 class PhotographerCard {
-  // "this" grosso modo correspond au nom de la classe (ici PhotographerCard)
+  // Classe constructeur pour pouvoir utiliser les clés au sein du json
   constructor(card) {
     this.card = card;
     // des qu'on crée un constructor, on utilisera this
   }
 
+  // Méthode pour la creation du profil du photographe
   createPhotographerCard() {
     const wrapper = document.querySelector('.photographer-wrapper');
 
@@ -26,7 +27,7 @@ class PhotographerCard {
     /**
      * CARD PORTRAIT
      */
-    // Ici le système permettant d'afficher l'id du photographe dans l'url
+    // Ici le système permettant d'afficher l'id du photographe dans l'url du site web
     const photographerPortrait = document.createElement('a');
     photographerPortrait.setAttribute('href', 'photographer.html?id=' + this.card.id);
     // photographer.html?id=xxx
@@ -106,7 +107,6 @@ document.addEventListener('keydown', function (event) {
   if (event.key === 'Tab') {
     //add all elements we want to include in our selection
     let focussableElements = document.querySelectorAll('.focussable');
-    console.log(focussableElements);
     ('a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])');
     if (document.activeElement && document.activeElement.form) {
       let focussable = Array.prototype.filter.call(
