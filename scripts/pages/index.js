@@ -84,7 +84,7 @@ class PhotographerCard {
 
 class App {
   constructor() {
-    this.photographerCardApi = new Api('data/photographers.json');
+    this.photographerCardApi = new Api('/data/photographers.json');
   }
 
   async main() {
