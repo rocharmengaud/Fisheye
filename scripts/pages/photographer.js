@@ -204,7 +204,7 @@ class Stats {
 }
 
 class App {
-  // Classe constructeur avec le chemin contenant le Json pour le fonctionnement du fetch de la classe API
+  // Classe constructeur avec le chemin contenant le Json pour le fonctionnement du fetch de la class API
   constructor() {
     this.photographerProfileApi = new Api('data/photographers.json');
   }
