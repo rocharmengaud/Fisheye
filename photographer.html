@@ -13,21 +13,21 @@
   <body>
     <header>
       <a href="/index.html">
-        <img src="assets/images/logo.png" class="logo focussable" alt="Fisheye logo"/>
+        <img src="assets/images/logo.png" class="logo focussable" tabindex="1" alt="Fisheye logo"/>
       </a>
     </header>
     <main id="main">
       <div class="photograph-profile">
-        <button class="contact_button focussable" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button focussable" tabindex="1" onclick="displayModal()">Contactez-moi</button>
       </div>
       <div class="filter-wrapper">
         <span>Trier par</span>
         <div class="dropdown">
-          <input type="text" aria-label='Choisir une option' class="textBox focussable" placeholder="Choisir une option" readonly />
+          <input type="text" aria-label='Choisir une option' class="textBox focussable"  tabindex="1" placeholder="Choisir une option" readonly />
           <div class="option">
-            <div data-sort="Popularité" class="filtreMedia focussable">Popularité</div>
-            <div data-sort="Date" class="filtreMedia focussable">Date</div>
-            <div data-sort="Titre" class="filtreMedia focussable">Titre</div>
+            <div data-sort="Popularité" tabindex="1" class="filtreMedia">Popularité</div>
+            <div data-sort="Date" tabindex="1" class="filtreMedia">Date</div>
+            <div data-sort="Titre" tabindex="1" class="filtreMedia">Titre</div>
           </div>
         </div>
       </div>

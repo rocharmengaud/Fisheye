@@ -88,10 +88,11 @@ class PhotographerMedia {
       // creation de l'element vidéo ansi que l'ajout des contrôles
       photographerPhotos = document.createElement('video');
       photographerPhotos.src = '/assets/photographers/' + this.media.image;
-      photographerPhotos.setAttribute('controls', 'controls');
+      // photographerPhotos.setAttribute('controls', 'controls');
       photographerPhotos.setAttribute('data-id', this.media.id);
       photographerPhotos.setAttribute('data-name', this.media.title);
       photographerPhotos.setAttribute('alt', this.media.title);
+      photographerPhotos.setAttribute('tabindex', '1');
       photographerPhotos.className = 'focussable';
 
       photographerPhotos.appendChild(source);
@@ -101,6 +102,7 @@ class PhotographerMedia {
       photographerPhotos.setAttribute('data-id', this.media.id);
       photographerPhotos.setAttribute('data-name', this.media.title);
       photographerPhotos.setAttribute('alt', this.media.title);
+      photographerPhotos.setAttribute('tabindex', '1');
       photographerPhotos.className = 'focussable';
     }
 
@@ -251,6 +253,11 @@ class App {
       )
       // Initialisation de la lightbox avec un clic sur un média avec forEach pour boucler
     ).forEach((element) => {
+      element.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          element.click();
+        }
+      });
       element.addEventListener('click', (event) => {
         // cet innerHTML sert a vider le wrapper a chaque clic sur un media
         document.querySelector('.lightbox-container').innerHTML = '';
@@ -475,27 +482,9 @@ body.addEventListener('keydown', function (event) {
   }
 });
 
-// fonction pour l'accessibilité avec la touche tab sur tous les éléments que l'on veut focussable
-document.addEventListener('keydown', function (event) {
-  if (event.key === 'Tab') {
-    //add all elements we want to include in our selection
-    let focussableElements = document.querySelectorAll('.focussable');
-    console.log(focussableElements);
-    ('a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])');
-    if (document.activeElement && document.activeElement.form) {
-      let focussable = Array.prototype.filter.call(
-        document.activeElement.form.querySelectorAll(focussableElements),
-        function (element) {
-          //check for visibility while always include the current activeElement
-          return element.offsetWidth > 0 || element.offsetHeight > 0 || element === document.activeElement;
-        }
-      );
-      let index = focussable.indexOf(document.activeElement);
-      if (index > -1) {
-        var nextElement = focussable[index + 1] || focussable[0];
-        nextElement.focus();
-      }
-    }
+document.querySelector('.textBox').addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    event.target.click();
   }
 });
 
