@@ -103,28 +103,6 @@ class App {
   }
 }
 
-document.addEventListener('keydown', function (event) {
-  if (event.key === 'Tab') {
-    //add all elements we want to include in our selection
-    let focussableElements = document.querySelectorAll('.focussable');
-    ('a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])');
-    if (document.activeElement && document.activeElement.form) {
-      let focussable = Array.prototype.filter.call(
-        document.activeElement.form.querySelectorAll(focussableElements),
-        function (element) {
-          //check for visibility while always include the current activeElement
-          return element.offsetWidth > 0 || element.offsetHeight > 0 || element === document.activeElement;
-        }
-      );
-      let index = focussable.indexOf(document.activeElement);
-      if (index > -1) {
-        var nextElement = focussable[index + 1] || focussable[0];
-        nextElement.focus();
-      }
-    }
-  }
-});
-
 const app = new App();
 app.main();
 // Autre moyen d'appeller:
