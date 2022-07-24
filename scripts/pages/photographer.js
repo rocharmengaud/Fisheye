@@ -93,7 +93,6 @@ class PhotographerMedia {
       photographerPhotos.setAttribute('data-name', this.media.title);
       photographerPhotos.setAttribute('alt', this.media.title);
       photographerPhotos.setAttribute('tabindex', '1');
-      photographerPhotos.className = 'focussable';
 
       photographerPhotos.appendChild(source);
     } else {
@@ -103,7 +102,6 @@ class PhotographerMedia {
       photographerPhotos.setAttribute('data-name', this.media.title);
       photographerPhotos.setAttribute('alt', this.media.title);
       photographerPhotos.setAttribute('tabindex', '1');
-      photographerPhotos.className = 'focussable';
     }
 
     /**
@@ -131,7 +129,7 @@ class PhotographerMedia {
     mediaLikes.appendChild(document.createTextNode(this.media.likes));
 
     const mediaHeart = document.createElement('div');
-    mediaHeart.className = 'media-heart focussable';
+    mediaHeart.className = 'media-heart';
     mediaHeart.innerHTML = '<ion-icon name="heart"></ion-icon>';
 
     wrapper.appendChild(photographerPhotos);
