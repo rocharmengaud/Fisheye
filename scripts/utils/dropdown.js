@@ -21,6 +21,7 @@ Array.from(document.querySelectorAll('.filtreMedia')).forEach(function (element)
         const dataLikes = mediacardList.sort((a, b) => {
           return b.dataset.likes - a.dataset.likes;
         });
+        // innerhtml vide pour vider le container des medias avant le tri
         mediaWrapper.innerHTML = '';
 
         dataLikes.forEach((element) => {
