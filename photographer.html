@@ -9,8 +9,8 @@
   </head>
   <body>
     <header>
-      <a href="/index.html">
-        <img src="assets/images/logo.png" class="logo focussable" tabindex="1" alt="Fisheye logo" />
+      <a tabindex="1" href="/index.html">
+        <img src="assets/images/logo.png" class="logo focussable" alt="Fisheye logo" />
       </a>
     </header>
     <main id="main">
@@ -20,14 +20,7 @@
       <div class="filter-wrapper">
         <span>Trier par</span>
         <div class="dropdown">
-          <input
-            type="text"
-            aria-label="Choisir une option"
-            class="textBox focussable"
-            tabindex="1"
-            placeholder="Choisir une option"
-            readonly
-          />
+          <span class="textBox focussable" tabindex="1">Choisir une option</span>
           <div class="option">
             <div data-sort="Popularité" tabindex="1" class="filtreMedia">Popularité</div>
             <div data-sort="Date" tabindex="1" class="filtreMedia">Date</div>
@@ -74,12 +67,12 @@
         </div>
       </div>
     </div>
+    <script src="/scripts/factories/photographer.js"></script>
+    <script src="/scripts/pages/photographer.js"></script>
+    <script src="/scripts/utils/contactForm.js"></script>
+    <script src="/scripts/utils/dropdown.js"></script>
+    <!-- Chargement de scripts du site IonIcons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   </body>
-  <script src="/scripts/factories/photographer.js"></script>
-  <script src="/scripts/pages/photographer.js"></script>
-  <script src="/scripts/utils/contactForm.js"></script>
-  <script src="/scripts/utils/dropdown.js"></script>
-  <!-- Chargement de scripts du site IonIcons -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </html>

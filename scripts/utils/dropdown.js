@@ -9,7 +9,7 @@ dropDown.onclick = function () {
 // L'option du dropdown selectionnée reste affichée
 Array.from(document.querySelectorAll('.filtreMedia')).forEach(function (element) {
   element.addEventListener('click', (event) => {
-    textBox.value = event.target.getAttribute('data-sort');
+    textBox.textContent = event.target.getAttribute('data-sort');
     const textboxValue = event.target.getAttribute('data-sort');
 
     const mediacardList = Array.from(document.querySelectorAll('.media-card'));

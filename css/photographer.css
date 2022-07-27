@@ -88,16 +88,12 @@
   pointer-events: none;
 }
 
-.dropdown input::placeholder {
-  color: #fff;
-}
-
 .dropdown.active::before {
   top: 22px;
   transform: rotate(-225deg);
 }
 
-.dropdown input {
+.dropdown span {
   position: absolute;
   top: 0;
   left: 0;
