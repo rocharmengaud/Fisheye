@@ -53,3 +53,17 @@ Array.from(document.querySelectorAll('.filtreMedia')).forEach(function (element)
     }
   });
 });
+
+dropDown.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape') {
+    textBox.click();
+  }
+});
+
+Array.from(document.querySelectorAll('.filtreMedia')).forEach(function (element) {
+  element.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+      element.click();
+    }
+  });
+});

@@ -4,16 +4,13 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <link
-      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet" />
     <title>Fisheye - photographe</title>
   </head>
   <body>
     <header>
       <a href="/index.html">
-        <img src="assets/images/logo.png" class="logo focussable" tabindex="1" alt="Fisheye logo"/>
+        <img src="assets/images/logo.png" class="logo focussable" tabindex="1" alt="Fisheye logo" />
       </a>
     </header>
     <main id="main">
@@ -23,7 +20,14 @@
       <div class="filter-wrapper">
         <span>Trier par</span>
         <div class="dropdown">
-          <input type="text" aria-label='Choisir une option' class="textBox focussable"  tabindex="1" placeholder="Choisir une option" readonly />
+          <input
+            type="text"
+            aria-label="Choisir une option"
+            class="textBox focussable"
+            tabindex="1"
+            placeholder="Choisir une option"
+            readonly
+          />
           <div class="option">
             <div data-sort="Popularité" tabindex="1" class="filtreMedia">Popularité</div>
             <div data-sort="Date" tabindex="1" class="filtreMedia">Date</div>
@@ -43,29 +47,29 @@
       <div id="contact_modal">
         <div class="modal">
           <header>
-            <div class="contact">Contactez-moi<div>
-              <div class="close-modal">
-              <img src="assets/icons/close.svg" onclick="closeModal()" alt="Cross"/>
+            <div class="contact">Contactez-moi</div>
+            <div class="close-modal">
+              <img src="assets/icons/close.svg" tabindex="1" onclick="closeModal()" alt="Cross" />
             </div>
           </header>
           <form name="contact" id="contact" action="photographer.html" method="get">
             <div class="formData">
               <label for="first">Prénom</label><br />
-              <input class="text-control" type="text" id="first" name="first" /><br />
+              <input class="text-control" tabindex="1" type="text" id="first" name="first" /><br />
             </div>
             <div class="formData">
               <label for="last">Nom</label><br />
-              <input class="text-control" type="text" id="last" name="last" /><br />
+              <input class="text-control" tabindex="1" type="text" id="last" name="last" /><br />
             </div>
             <div class="formData">
               <label for="email">E-mail</label><br />
-              <input class="text-control" type="email" id="email" name="email" /><br />
+              <input class="text-control" tabindex="1" type="email" id="email" name="email" /><br />
             </div>
             <div class="formData">
               <label for="message">Votre message</label><br />
-              <input class="text-control" type="text" id="message" name="message" /><br />
+              <input class="text-control" tabindex="1" type="text" id="message" name="message" /><br />
             </div>
-            <div class="submit_button">Envoyer</div>
+            <div tabindex="1" class="submit_button">Envoyer</div>
           </form>
         </div>
       </div>
